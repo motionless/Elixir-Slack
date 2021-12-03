@@ -19,6 +19,7 @@ defmodule Slack.Web.DefaultClient do
 
   @impl true
   def post!(url, body) do
+    #:hackney_trace.enable(:max, :io)
     url
     |> HTTPoison.post!(body, [], opts())
     |> Map.fetch!(:body)
@@ -27,5 +28,6 @@ defmodule Slack.Web.DefaultClient do
 
   defp opts do
     Application.get_env(:slack, :web_http_client_opts, [])
+    #:hackney_trace.enable(:max, :io)
   end
 end
